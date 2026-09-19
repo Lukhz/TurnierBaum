@@ -311,8 +311,17 @@ function reorderLeagueMatches(matches: Match[]) {
 }
 
 function countPlayerOverlap(previousPlayerIds: [string | null, string | null], match: Match) {
-  const currentPlayerIds = [match.homePlayerId, match.awayPlayerId]
-  return currentPlayerIds.filter((playerId) => playerId && previousPlayerIds.includes(playerId)).length
+  const previousSet = new Set(previousPlayerIds.filter((playerId): playerId is string => Boolean(playerId)))
+  const currentSet = new Set([match.homePlayerId, match.awayPlayerId].filter((playerId): playerId is string => Boolean(playerId)))
+
+  let overlapCount = 0
+  for (const playerId of currentSet) {
+    if (previousSet.has(playerId)) {
+      overlapCount += 1
+    }
+  }
+
+  return overlapCount
 }
 
 function createGroups(players: Player[]) {
