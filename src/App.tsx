@@ -50,12 +50,12 @@ function App() {
   const championName = getPlayerName(tournament.players, tournament.winnerId)
 
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-950 dark:bg-slate-950 dark:text-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-orange-50 to-amber-100 text-rose-950 dark:bg-gradient-to-br dark:from-fuchsia-950 dark:via-violet-950 dark:to-rose-950 dark:text-rose-50">
       <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8">
         <header className="rounded-[2rem] border border-slate-200 bg-white/90 p-6 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/90">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
-              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-indigo-500">TurnierBaum</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.25em] text-fuchsia-500">TurnierBaum</p>
               <h1 className="mt-2 text-3xl font-bold text-slate-950 dark:text-slate-50 sm:text-4xl">
                 Turniere vom Start bis zur Siegerehrung steuern
               </h1>
@@ -97,7 +97,7 @@ function App() {
                   }}
                   className={`rounded-2xl border px-4 py-3 text-left transition ${
                     isActive
-                      ? 'border-indigo-500 bg-indigo-500 text-white'
+                      ? 'border-fuchsia-500 bg-fuchsia-500 text-white'
                       : isDone
                         ? 'border-emerald-300 bg-emerald-50 text-emerald-700 dark:border-emerald-900 dark:bg-emerald-950/30 dark:text-emerald-300'
                         : 'border-slate-200 bg-white text-slate-500 disabled:cursor-not-allowed dark:border-slate-800 dark:bg-slate-950 dark:text-slate-400'
@@ -115,7 +115,7 @@ function App() {
           {tournament.step === 1 ? (
             <section className="grid gap-6 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900 lg:grid-cols-[1.2fr_0.8fr]">
               <div>
-                <span className="inline-flex rounded-full bg-indigo-500/10 px-3 py-1 text-sm font-semibold text-indigo-600 dark:text-indigo-300">
+                <span className="inline-flex rounded-full bg-fuchsia-500/10 px-3 py-1 text-sm font-semibold text-fuchsia-600 dark:text-fuchsia-300">
                   Seite 1 · Willkommen
                 </span>
                 <h2 className="mt-5 text-4xl font-bold text-slate-950 dark:text-slate-50">Turniermodus wählen, Teilnehmer eintragen, Ergebnisse pflegen.</h2>
@@ -126,7 +126,7 @@ function App() {
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-indigo-600 px-6 py-3 font-semibold text-white transition hover:bg-indigo-500"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-fuchsia-600 px-6 py-3 font-semibold text-white transition hover:bg-fuchsia-500"
                   >
                     Starten <ArrowRight className="h-4 w-4" />
                   </button>
@@ -151,7 +151,7 @@ function App() {
           {tournament.step === 2 ? (
             <section className="space-y-6">
               <div className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-                <span className="inline-flex rounded-full bg-indigo-500/10 px-3 py-1 text-sm font-semibold text-indigo-600 dark:text-indigo-300">
+                <span className="inline-flex rounded-full bg-fuchsia-500/10 px-3 py-1 text-sm font-semibold text-fuchsia-600 dark:text-fuchsia-300">
                   Seite 2 · Modus-Auswahl
                 </span>
                 <h2 className="mt-4 text-3xl font-bold text-slate-950 dark:text-slate-50">Welcher Turniermodus soll abgebildet werden?</h2>
@@ -200,7 +200,7 @@ function App() {
             <section className="space-y-6">
               <div className="flex flex-col gap-4 rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900 lg:flex-row lg:items-end lg:justify-between">
                 <div>
-                  <span className="inline-flex rounded-full bg-indigo-500/10 px-3 py-1 text-sm font-semibold text-indigo-600 dark:text-indigo-300">
+                  <span className="inline-flex rounded-full bg-fuchsia-500/10 px-3 py-1 text-sm font-semibold text-fuchsia-600 dark:text-fuchsia-300">
                     Seite 4 · Turnierbaum & Ergebnisse
                   </span>
                   <h2 className="mt-4 text-3xl font-bold text-slate-950 dark:text-slate-50">{selectedMeta?.title ?? 'Turnier'} verwalten</h2>
@@ -220,7 +220,7 @@ function App() {
                     type="button"
                     onClick={() => setStep(5)}
                     disabled={!tournament.isComplete}
-                    className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-slate-900 px-5 py-3 font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300 dark:bg-indigo-600 dark:hover:bg-indigo-500 dark:disabled:bg-slate-700"
+                    className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-slate-900 px-5 py-3 font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300 dark:bg-fuchsia-600 dark:hover:bg-fuchsia-500 dark:disabled:bg-slate-700"
                   >
                     Zum Ergebnis
                   </button>
@@ -279,7 +279,7 @@ function App() {
                   Abschlussansicht mit Siegerkachel, Ergebnistabelle und Reset für ein neues Turnier.
                 </p>
 
-                <div className="mt-8 rounded-3xl bg-gradient-to-br from-indigo-600 via-violet-600 to-sky-500 p-6 text-white shadow-lg">
+                <div className="mt-8 rounded-3xl bg-gradient-to-br from-fuchsia-600 via-orange-500 to-amber-400 p-6 text-white shadow-lg">
                   <p className="text-sm uppercase tracking-[0.25em] text-white/80">Champion</p>
                   <p className="mt-3 text-3xl font-bold">{tournament.winnerId ? championName : 'Noch offen'}</p>
                   <p className="mt-3 text-sm text-white/80">Modus: {selectedMeta?.title ?? 'Nicht gewählt'}</p>
@@ -289,7 +289,7 @@ function App() {
                   <button
                     type="button"
                     onClick={resetTournament}
-                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-slate-900 px-6 py-3 font-semibold text-white transition hover:bg-slate-800 dark:bg-indigo-600 dark:hover:bg-indigo-500"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-slate-900 px-6 py-3 font-semibold text-white transition hover:bg-slate-800 dark:bg-fuchsia-600 dark:hover:bg-fuchsia-500"
                   >
                     Neues Turnier <RotateCcw className="h-4 w-4" />
                   </button>
@@ -341,7 +341,7 @@ function MetricCard({ icon: Icon, label, value }: MetricCardProps) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950">
       <div className="flex items-center gap-3">
-        <div className="rounded-2xl bg-indigo-500/10 p-2 text-indigo-500">
+        <div className="rounded-2xl bg-fuchsia-500/10 p-2 text-fuchsia-500">
           <Icon className="h-5 w-5" />
         </div>
         <div>
@@ -384,9 +384,9 @@ function KnockoutBracket({ matches, onScoreChange, players, title }: KnockoutBra
       <div className="grid gap-4 xl:grid-cols-4">
         {rounds.map((entry) => (
           <div key={entry.round} className="space-y-4">
-            <div className="rounded-2xl bg-slate-100 px-4 py-3 text-sm font-semibold text-slate-700 dark:bg-slate-800 dark:text-slate-100">
+            <h4 className="rounded-2xl border border-amber-300 bg-amber-200 px-4 py-3 text-sm font-semibold text-amber-900 dark:border-amber-700 dark:bg-amber-800/60 dark:text-amber-100">
               Runde {entry.round}
-            </div>
+            </h4>
             {entry.matches.map((match) => (
               <MatchCard key={match.id} match={match} players={players} onScoreChange={onScoreChange} />
             ))}
