@@ -119,7 +119,7 @@ export function buildTournament(type: TournamentType, players: Player[]): Tourna
       group.name,
     ),
   )
-  const qualifierCount = groups.length * 2
+  const qualifierCount = groups.reduce((count, group) => count + Math.min(group.playerIds.length, 2), 0)
   const knockoutMatches = createKnockoutSkeleton(qualifierCount)
 
   return recalculateTournament({
@@ -188,13 +188,23 @@ export function updateMatchScore(
   rawValue: string,
 ) {
   const value = rawValue === '' ? null : Number(rawValue)
-  const safeValue = value === null || Number.isNaN(value) || value < 0 || !Number.isInteger(value) ? null : value
   const nextMatches = tournament.matches.map((match) => {
     if (match.id !== matchId) return match
 
+    if (value === null) {
+      return {
+        ...match,
+        [side]: null,
+      }
+    }
+
+    if (Number.isNaN(value) || value < 0 || !Number.isInteger(value)) {
+      return match
+    }
+
     return {
       ...match,
-      [side]: safeValue,
+      [side]: value,
     }
   })
 
@@ -263,7 +273,7 @@ function createRoundRobinMatches(
 }
 
 function createGroups(players: Player[]) {
-  const groupCount = players.length >= 12 ? 4 : 2
+  const groupCount = players.length >= 8 ? 4 : 2
   const groups: TournamentGroup[] = Array.from({ length: groupCount }, (_, index) => ({
     id: `group-${index + 1}`,
     name: `Gruppe ${String.fromCharCode(65 + index)}`,
