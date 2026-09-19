@@ -38,7 +38,6 @@ select {
 
 #root {
   min-height: 100vh;
-  overflow-x: clip;
 }
 
 :where(
@@ -54,7 +53,7 @@ select {
     td
   ) {
   overflow-wrap: anywhere;
-  word-break: break-word;
+  word-break: normal;
   hyphens: auto;
 }
 
