@@ -56,15 +56,3 @@ select {
   word-break: normal;
   hyphens: auto;
 }
-
-:where(
-    header,
-    main,
-    nav,
-    section,
-    article,
-    aside
-  ) {
-  max-width: 100%;
-  min-width: 0;
-}
