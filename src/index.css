@@ -38,4 +38,34 @@ select {
 
 #root {
   min-height: 100vh;
+  overflow-x: clip;
+}
+
+:where(
+    h1,
+    h2,
+    h3,
+    p,
+    span,
+    button,
+    label,
+    li,
+    th,
+    td
+  ) {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+:where(
+    header,
+    main,
+    nav,
+    section,
+    article,
+    aside
+  ) {
+  max-width: 100%;
+  min-width: 0;
 }
