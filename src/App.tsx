@@ -267,7 +267,7 @@ function App() {
             </section>
           ) : null}
 
-          {tournament.step === 5 ? (
+          {tournament.step === 5 && tournament.isComplete ? (
             <section className="grid gap-6 lg:grid-cols-[1fr_1.1fr]">
               <div className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-slate-900">
                 <span className="inline-flex rounded-full bg-emerald-500/10 px-3 py-1 text-sm font-semibold text-emerald-600 dark:text-emerald-300">

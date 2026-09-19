@@ -187,8 +187,8 @@ export function updateMatchScore(
   side: 'homeScore' | 'awayScore',
   rawValue: string,
 ) {
-  const value = rawValue === '' ? null : Number.parseInt(rawValue, 10)
-  const safeValue = value === null || Number.isNaN(value) || value < 0 ? null : value
+  const value = rawValue === '' ? null : Number(rawValue)
+  const safeValue = value === null || Number.isNaN(value) || value < 0 || !Number.isInteger(value) ? null : value
   const nextMatches = tournament.matches.map((match) => {
     if (match.id !== matchId) return match
 

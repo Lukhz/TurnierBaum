@@ -46,6 +46,7 @@ export function MatchCard({ match, onScoreChange, players }: MatchCardProps) {
             <input
               type="number"
               min="0"
+              step="1"
               value={entry.score ?? ''}
               disabled={isPending}
               onChange={(event) => onScoreChange(match.id, entry.side, event.target.value)}
