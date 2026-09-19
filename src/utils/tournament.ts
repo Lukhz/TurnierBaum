@@ -322,7 +322,7 @@ function flattenPairs(pairs: Array<[string | null, string | null]>) {
 }
 
 function createKnockoutSkeleton(participantCount: number) {
-  const size = nextPowerOfTwo(participantCount)
+  const size = Math.max(2, nextPowerOfTwo(participantCount))
   const totalRounds = Math.log2(size)
   const matches: Match[] = []
 

@@ -9,6 +9,24 @@ import {
   updateMatchScore,
 } from '../utils/tournament'
 
+
+function createEditableTournament(tournament: Tournament, players: Player[]): Tournament {
+  return {
+    ...tournament,
+    step: 3,
+    players: players.map((player, index) => ({
+      ...player,
+      seed: index + 1,
+    })),
+    groups: [],
+    matches: [],
+    standings: [],
+    winnerId: null,
+    isReady: false,
+    isComplete: false,
+  }
+}
+
 interface TournamentStore {
   tournament: Tournament
   setStep: (step: TournamentStep) => void
@@ -58,20 +76,15 @@ export const useTournamentStore = create<TournamentStore>((set) => ({
 
       const players = [...state.tournament.players, createPlayer(trimmedName, state.tournament.players.length + 1)]
       return {
-        tournament: {
-          ...state.tournament,
-          players,
-        },
+        tournament: createEditableTournament(state.tournament, players),
       }
     }),
   removePlayer: (playerId) =>
     set((state) => ({
-      tournament: {
-        ...state.tournament,
-        players: state.tournament.players
-          .filter((player) => player.id !== playerId)
-          .map((player, index) => ({ ...player, seed: index + 1 })),
-      },
+      tournament: createEditableTournament(
+        state.tournament,
+        state.tournament.players.filter((player) => player.id !== playerId),
+      ),
     })),
   renamePlayer: (playerId, name) =>
     set((state) => {
@@ -88,10 +101,7 @@ export const useTournamentStore = create<TournamentStore>((set) => ({
       )
 
       return {
-        tournament: {
-          ...state.tournament,
-          players,
-        },
+        tournament: createEditableTournament(state.tournament, players),
       }
     }),
   generateTournament: () =>
@@ -110,4 +120,3 @@ export const useTournamentStore = create<TournamentStore>((set) => ({
     })),
   resetTournament: () => set({ tournament: createEmptyTournament() }),
 }))
-
