@@ -65,7 +65,7 @@ function App() {
             </div>
 
             <div className="grid gap-3 sm:grid-cols-3 lg:min-w-[22rem]">
-              <MetricCard icon={Users} label="Teams" value={`${tournament.players.length}`} />
+              <MetricCard icon={Users} label="Spieler" value={`${tournament.players.length}`} />
               <MetricCard
                 icon={Swords}
                 label="Spiele"
