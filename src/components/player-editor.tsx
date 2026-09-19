@@ -29,6 +29,18 @@ export function PlayerEditor({
   const [newPlayer, setNewPlayer] = useState('')
   const [draftNames, setDraftNames] = useState<Record<string, string>>({})
 
+  const submitNewPlayer = () => {
+    const nextName = newPlayer.trim()
+    const isDuplicate = players.some(
+      (player) => player.name.trim().toLowerCase() === nextName.toLowerCase(),
+    )
+
+    if (nextName.length < 2 || isDuplicate) return
+
+    onAddPlayer(nextName)
+    setNewPlayer('')
+  }
+
 
   return (
     <section className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
@@ -52,8 +64,7 @@ export function PlayerEditor({
             onKeyDown={(event) => {
               if (event.key === 'Enter') {
                 event.preventDefault()
-                onAddPlayer(newPlayer)
-                setNewPlayer('')
+                submitNewPlayer()
               }
             }}
             className="min-h-12 flex-1 rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none ring-0 transition focus:border-indigo-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-50"
@@ -62,8 +73,7 @@ export function PlayerEditor({
           <button
             type="button"
             onClick={() => {
-              onAddPlayer(newPlayer)
-              setNewPlayer('')
+              submitNewPlayer()
             }}
             className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-indigo-600 px-5 py-3 font-semibold text-white transition hover:bg-indigo-500"
           >

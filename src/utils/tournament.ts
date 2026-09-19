@@ -292,20 +292,23 @@ function buildQualifiedPlayerOrder(players: Player[], groups: TournamentGroup[],
 
   if (groups.length === 2) {
     const [groupA, groupB] = standingsByGroup
-    return [groupA?.[0]?.playerId ?? null, groupB?.[1]?.playerId ?? null, groupB?.[0]?.playerId ?? null, groupA?.[1]?.playerId ?? null]
+    return flattenPairs([
+      [groupA?.[0]?.playerId ?? null, groupB?.[1]?.playerId ?? null],
+      [groupB?.[0]?.playerId ?? null, groupA?.[1]?.playerId ?? null],
+    ])
   }
 
   const [groupA, groupB, groupC, groupD] = standingsByGroup
-  return [
-    groupA?.[0]?.playerId ?? null,
-    groupB?.[1]?.playerId ?? null,
-    groupB?.[0]?.playerId ?? null,
-    groupA?.[1]?.playerId ?? null,
-    groupC?.[0]?.playerId ?? null,
-    groupD?.[1]?.playerId ?? null,
-    groupD?.[0]?.playerId ?? null,
-    groupC?.[1]?.playerId ?? null,
-  ]
+  return flattenPairs([
+    [groupA?.[0]?.playerId ?? null, groupB?.[1]?.playerId ?? null],
+    [groupC?.[0]?.playerId ?? null, groupD?.[1]?.playerId ?? null],
+    [groupB?.[0]?.playerId ?? null, groupA?.[1]?.playerId ?? null],
+    [groupD?.[0]?.playerId ?? null, groupC?.[1]?.playerId ?? null],
+  ])
+}
+
+function flattenPairs(pairs: Array<[string | null, string | null]>) {
+  return pairs.flatMap(([homePlayerId, awayPlayerId]) => [homePlayerId, awayPlayerId])
 }
 
 function createKnockoutSkeleton(participantCount: number) {

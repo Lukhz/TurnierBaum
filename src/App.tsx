@@ -83,14 +83,15 @@ function App() {
             {STEPS.map((step) => {
               const isActive = tournament.step === step.id
               const isDone = tournament.step > step.id
+              const canAccessStep = step.id <= tournament.step || (step.id === 5 && tournament.isComplete)
 
               return (
                 <button
                   key={step.id}
                   type="button"
-                  disabled={step.id > tournament.step && !(step.id === 5 && tournament.isComplete)}
+                  disabled={!canAccessStep}
                   onClick={() => {
-                    if (step.id <= tournament.step || (step.id === 5 && tournament.isComplete)) {
+                    if (canAccessStep) {
                       setStep(step.id)
                     }
                   }}
