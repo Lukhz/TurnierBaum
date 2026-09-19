@@ -169,7 +169,7 @@ export function recalculateTournament(tournament: Tournament): Tournament {
   )
 
   const qualifiedPlayers = buildQualifiedPlayerOrder(tournament.players, tournament.groups, groupMatches)
-  const syncedKnockoutMatches = syncKnockoutMatches(knockoutMatches, qualifiedPlayers)
+  const syncedKnockoutMatches = syncKnockoutMatches(knockoutMatches, qualifiedPlayers, false)
   const finalMatch = getFinalMatch(syncedKnockoutMatches)
 
   return {
@@ -279,31 +279,33 @@ function createGroups(players: Player[]) {
 }
 
 function buildQualifiedPlayerOrder(players: Player[], groups: TournamentGroup[], groupMatches: Match[]) {
-  const standingsByGroup = groups.map((group) =>
-    calculateStandings(
+  const standingsByGroup = groups.map((group) => {
+    const matches = groupMatches.filter((match) => match.groupId === group.id)
+    const standings = calculateStandings(
       players.filter((player) => group.playerIds.includes(player.id)),
-      groupMatches.filter((match) => match.groupId === group.id),
-    ),
-  )
+      matches,
+    )
+    const isComplete = matches.every(isMatchComplete)
+
+    return isComplete ? standings : []
+  })
 
   if (groups.length === 2) {
     const [groupA, groupB] = standingsByGroup
-    return [groupA?.[0]?.playerId, groupB?.[1]?.playerId, groupB?.[0]?.playerId, groupA?.[1]?.playerId].filter(
-      (playerId): playerId is string => Boolean(playerId),
-    )
+    return [groupA?.[0]?.playerId ?? null, groupB?.[1]?.playerId ?? null, groupB?.[0]?.playerId ?? null, groupA?.[1]?.playerId ?? null]
   }
 
   const [groupA, groupB, groupC, groupD] = standingsByGroup
   return [
-    groupA?.[0]?.playerId,
-    groupB?.[1]?.playerId,
-    groupB?.[0]?.playerId,
-    groupA?.[1]?.playerId,
-    groupC?.[0]?.playerId,
-    groupD?.[1]?.playerId,
-    groupD?.[0]?.playerId,
-    groupC?.[1]?.playerId,
-  ].filter((playerId): playerId is string => Boolean(playerId))
+    groupA?.[0]?.playerId ?? null,
+    groupB?.[1]?.playerId ?? null,
+    groupB?.[0]?.playerId ?? null,
+    groupA?.[1]?.playerId ?? null,
+    groupC?.[0]?.playerId ?? null,
+    groupD?.[1]?.playerId ?? null,
+    groupD?.[0]?.playerId ?? null,
+    groupC?.[1]?.playerId ?? null,
+  ]
 }
 
 function createKnockoutSkeleton(participantCount: number) {
@@ -333,12 +335,12 @@ function createKnockoutSkeleton(participantCount: number) {
   return matches
 }
 
-function syncKnockoutMatches(matches: Match[], participants: string[]) {
+function syncKnockoutMatches(matches: Match[], participants: Array<string | null>, allowByes = true) {
   const rounds = getMatchesByRound(matches).map((entry) => entry.matches.map((match) => ({ ...match })))
 
   const firstRound = rounds[0] ?? []
   for (const [index, match] of firstRound.entries()) {
-    assignParticipants(match, participants[index * 2] ?? null, participants[index * 2 + 1] ?? null)
+    assignParticipants(match, participants[index * 2] ?? null, participants[index * 2 + 1] ?? null, allowByes)
   }
 
   for (let roundIndex = 1; roundIndex < rounds.length; roundIndex += 1) {
@@ -346,14 +348,24 @@ function syncKnockoutMatches(matches: Match[], participants: string[]) {
     const currentRound = rounds[roundIndex] ?? []
 
     for (const [index, match] of currentRound.entries()) {
-      assignParticipants(match, previousRound[index * 2]?.winnerId ?? null, previousRound[index * 2 + 1]?.winnerId ?? null)
+      assignParticipants(
+        match,
+        previousRound[index * 2]?.winnerId ?? null,
+        previousRound[index * 2 + 1]?.winnerId ?? null,
+        allowByes,
+      )
     }
   }
 
   return rounds.flat()
 }
 
-function assignParticipants(match: Match, homePlayerId: string | null, awayPlayerId: string | null) {
+function assignParticipants(
+  match: Match,
+  homePlayerId: string | null,
+  awayPlayerId: string | null,
+  allowByes: boolean,
+) {
   const didParticipantsChange = match.homePlayerId !== homePlayerId || match.awayPlayerId !== awayPlayerId
   match.homePlayerId = homePlayerId
   match.awayPlayerId = awayPlayerId
@@ -364,12 +376,12 @@ function assignParticipants(match: Match, homePlayerId: string | null, awayPlaye
     match.winnerId = null
   }
 
-  if (homePlayerId && !awayPlayerId) {
+  if (allowByes && homePlayerId && !awayPlayerId) {
     match.winnerId = homePlayerId
     return
   }
 
-  if (awayPlayerId && !homePlayerId) {
+  if (allowByes && awayPlayerId && !homePlayerId) {
     match.winnerId = awayPlayerId
     return
   }

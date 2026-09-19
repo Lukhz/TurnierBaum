@@ -118,6 +118,7 @@ export function PlayerEditor({
                 />
                 <button
                   type="button"
+                  aria-label={`${player.name} entfernen`}
                   onClick={() => onRemovePlayer(player.id)}
                   className="inline-flex min-h-11 items-center justify-center gap-2 rounded-2xl border border-rose-200 px-4 py-2 font-medium text-rose-600 transition hover:bg-rose-50 dark:border-rose-900/50 dark:hover:bg-rose-950/40"
                 >

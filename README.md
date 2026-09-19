@@ -166,7 +166,7 @@ Der globale Zustand sitzt in `/src/store/tournament-store.ts` und steuert den ko
 - `setStep` steuert die Navigation durch die 5 Ansichten.
 - `setType` initialisiert den gewählten Turniermodus.
 - `generateTournament` erzeugt Spielplan, Gruppen und Bracket.
-- `setMatchScore` aktualisiert Ergebnisse und recalculiert Tabellen/Sieger.
+- `setMatchScore` aktualisiert Ergebnisse und berechnet Tabellen und Sieger neu.
 - `resetTournament` startet den kompletten Flow neu.
 
 ## Unterstützte Turnierlogik
