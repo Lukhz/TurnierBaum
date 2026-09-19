@@ -40,8 +40,7 @@ select {
   min-height: 100vh;
 }
 
-html[lang]
-  :where(
+:where(
     h1,
     h2,
     h3,
@@ -55,5 +54,20 @@ html[lang]
   ) {
   overflow-wrap: anywhere;
   word-break: normal;
+}
+
+html[lang]
+  :where(
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    li,
+    th,
+    td
+  ) {
   hyphens: auto;
 }
