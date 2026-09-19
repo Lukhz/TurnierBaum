@@ -6,7 +6,6 @@ import {
   canGenerateTournament,
   createEmptyTournament,
   createPlayer,
-  recalculateTournament,
   updateMatchScore,
 } from '../utils/tournament'
 
@@ -76,8 +75,16 @@ export const useTournamentStore = create<TournamentStore>((set) => ({
     })),
   renamePlayer: (playerId, name) =>
     set((state) => {
+      const trimmedName = name.trim()
+      if (trimmedName.length < 2) return state
+
+      const isDuplicate = state.tournament.players.some(
+        (player) => player.id !== playerId && player.name.trim().toLowerCase() === trimmedName.toLowerCase(),
+      )
+      if (isDuplicate) return state
+
       const players = state.tournament.players.map((player): Player =>
-        player.id === playerId ? { ...player, name } : player,
+        player.id === playerId ? { ...player, name: trimmedName } : player,
       )
 
       return {
@@ -104,6 +111,3 @@ export const useTournamentStore = create<TournamentStore>((set) => ({
   resetTournament: () => set({ tournament: createEmptyTournament() }),
 }))
 
-export function useTournamentCompletion() {
-  return useTournamentStore((state) => recalculateTournament(state.tournament))
-}

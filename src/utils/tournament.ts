@@ -188,12 +188,13 @@ export function updateMatchScore(
   rawValue: string,
 ) {
   const value = rawValue === '' ? null : Number.parseInt(rawValue, 10)
+  const safeValue = value === null || Number.isNaN(value) || value < 0 ? null : value
   const nextMatches = tournament.matches.map((match) => {
     if (match.id !== matchId) return match
 
     return {
       ...match,
-      [side]: Number.isNaN(value) ? null : value,
+      [side]: safeValue,
     }
   })
 

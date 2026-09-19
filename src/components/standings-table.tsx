@@ -13,7 +13,7 @@ export function StandingsTable({ players, rows, title }: StandingsTableProps) {
       <div className="mb-4 flex items-center justify-between gap-3">
         <h3 className="text-lg font-semibold text-slate-900 dark:text-slate-50">{title}</h3>
         <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">
-          {rows.length} Teams
+          {rows.length} Teilnehmer
         </span>
       </div>
 
@@ -22,7 +22,7 @@ export function StandingsTable({ players, rows, title }: StandingsTableProps) {
           <thead>
             <tr className="border-b border-slate-200 text-slate-500 dark:border-slate-800 dark:text-slate-400">
               <th className="px-3 py-2">#</th>
-              <th className="px-3 py-2">Team</th>
+              <th className="px-3 py-2">Teilnehmer</th>
               <th className="px-3 py-2">Sp.</th>
               <th className="px-3 py-2">S</th>
               <th className="px-3 py-2">U</th>

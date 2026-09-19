@@ -27,6 +27,8 @@ export function PlayerEditor({
   tournamentLabel,
 }: PlayerEditorProps) {
   const [newPlayer, setNewPlayer] = useState('')
+  const [draftNames, setDraftNames] = useState<Record<string, string>>({})
+
 
   return (
     <section className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
@@ -84,8 +86,34 @@ export function PlayerEditor({
                   {index + 1}
                 </div>
                 <input
-                  value={player.name}
-                  onChange={(event) => onRenamePlayer(player.id, event.target.value)}
+                  value={draftNames[player.id] ?? player.name}
+                  onChange={(event) =>
+                    setDraftNames((current) => ({
+                      ...current,
+                      [player.id]: event.target.value,
+                    }))
+                  }
+                  onBlur={() => {
+                    const nextName = (draftNames[player.id] ?? player.name).trim()
+                    const isDuplicate = players.some(
+                      (entry) => entry.id !== player.id && entry.name.trim().toLowerCase() === nextName.toLowerCase(),
+                    )
+
+                    if (nextName.length < 2 || isDuplicate) {
+                      setDraftNames((current) => ({
+                        ...current,
+                        [player.id]: player.name,
+                      }))
+                      return
+                    }
+
+                    onRenamePlayer(player.id, nextName)
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter') {
+                      event.currentTarget.blur()
+                    }
+                  }}
                   className="min-h-11 flex-1 rounded-2xl border border-slate-300 bg-white px-4 py-2 text-slate-900 outline-none transition focus:border-indigo-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-50"
                 />
                 <button
