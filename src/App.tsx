@@ -50,7 +50,7 @@ function App() {
   const championName = getPlayerName(tournament.players, tournament.winnerId)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-orange-50 to-amber-100 text-rose-950 dark:from-fuchsia-950 dark:via-violet-950 dark:to-rose-950 dark:text-rose-50">
+    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-orange-50 to-amber-100 text-rose-950 dark:bg-gradient-to-br dark:from-fuchsia-950 dark:via-violet-950 dark:to-rose-950 dark:text-rose-50">
       <div className="mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8">
         <header className="rounded-[2rem] border border-slate-200 bg-white/90 p-6 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/90">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -384,7 +384,7 @@ function KnockoutBracket({ matches, onScoreChange, players, title }: KnockoutBra
       <div className="grid gap-4 xl:grid-cols-4">
         {rounds.map((entry) => (
           <div key={entry.round} className="space-y-4">
-            <div className="rounded-2xl bg-amber-100 px-4 py-3 text-sm font-semibold text-amber-800 dark:bg-amber-900/40 dark:text-amber-200">
+            <div className="rounded-2xl border border-amber-300 bg-amber-200 px-4 py-3 text-sm font-semibold text-amber-900 dark:border-amber-700 dark:bg-amber-800/60 dark:text-amber-100">
               Runde {entry.round}
             </div>
             {entry.matches.map((match) => (
