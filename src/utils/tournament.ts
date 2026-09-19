@@ -298,7 +298,6 @@ function reorderLeagueMatches(matches: Match[]) {
     }
 
     const [selectedMatch] = remainingMatches.splice(selectedIndex, 1)
-    if (!selectedMatch) continue
 
     previousPlayerIds = [selectedMatch.homePlayerId, selectedMatch.awayPlayerId]
     orderedMatches.push({
