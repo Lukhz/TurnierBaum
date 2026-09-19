@@ -40,7 +40,8 @@ select {
   min-height: 100vh;
 }
 
-:where(
+html[lang]
+  :where(
     h1,
     h2,
     h3,
