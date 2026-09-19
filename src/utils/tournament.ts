@@ -247,12 +247,12 @@ function createRoundRobinMatches(
   groupId?: string,
   groupName?: string,
 ) {
-  const matches: Match[] = []
+  const generatedMatches: Match[] = []
   let order = 1
 
   for (let homeIndex = 0; homeIndex < players.length; homeIndex += 1) {
     for (let awayIndex = homeIndex + 1; awayIndex < players.length; awayIndex += 1) {
-      matches.push({
+      generatedMatches.push({
         id: crypto.randomUUID(),
         stage,
         round: 1,
@@ -269,7 +269,51 @@ function createRoundRobinMatches(
     }
   }
 
-  return matches
+  if (stage === 'league') {
+    return reorderLeagueMatches(generatedMatches)
+  }
+
+  return generatedMatches
+}
+
+function reorderLeagueMatches(matches: Match[]) {
+  const orderedMatches: Match[] = []
+  const remainingMatches = [...matches]
+  let previousPlayerIds: [string | null, string | null] | null = null
+
+  while (remainingMatches.length > 0) {
+    let selectedIndex = 0
+    let selectedOverlap = Number.POSITIVE_INFINITY
+
+    for (const [index, match] of remainingMatches.entries()) {
+      const overlap = previousPlayerIds ? countPlayerOverlap(previousPlayerIds, match) : 0
+      if (overlap < selectedOverlap) {
+        selectedIndex = index
+        selectedOverlap = overlap
+      }
+
+      if (selectedOverlap === 0) {
+        break
+      }
+    }
+
+    const [selectedMatch] = remainingMatches.splice(selectedIndex, 1)
+    if (!selectedMatch) continue
+
+    previousPlayerIds = [selectedMatch.homePlayerId, selectedMatch.awayPlayerId]
+    orderedMatches.push({
+      ...selectedMatch,
+      order: orderedMatches.length + 1,
+      label: `Spiel ${orderedMatches.length + 1}`,
+    })
+  }
+
+  return orderedMatches
+}
+
+function countPlayerOverlap(previousPlayerIds: [string | null, string | null], match: Match) {
+  const currentPlayerIds = [match.homePlayerId, match.awayPlayerId]
+  return currentPlayerIds.filter((playerId) => playerId && previousPlayerIds.includes(playerId)).length
 }
 
 function createGroups(players: Player[]) {
