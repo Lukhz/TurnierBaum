@@ -385,7 +385,7 @@ function KnockoutBracket({ matches, onScoreChange, players, title }: KnockoutBra
         {rounds.map((entry) => (
           <div key={entry.round} className="space-y-4">
             <div className="rounded-2xl border border-amber-300 bg-amber-200 px-4 py-3 text-sm font-semibold text-amber-900 dark:border-amber-700 dark:bg-amber-800/60 dark:text-amber-100">
-              Runde {entry.round}
+              🏁 Runde {entry.round}
             </div>
             {entry.matches.map((match) => (
               <MatchCard key={match.id} match={match} players={players} onScoreChange={onScoreChange} />
