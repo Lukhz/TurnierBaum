@@ -51,7 +51,7 @@ export function MatchCard({ match, onScoreChange, players }: MatchCardProps) {
               value={entry.score ?? ''}
               disabled={isPending}
               onChange={(event) => onScoreChange(match.id, entry.side, event.target.value)}
-              className="h-11 w-20 rounded-2xl border border-slate-300 bg-white px-3 text-center text-slate-900 outline-none transition focus:border-indigo-400 disabled:cursor-not-allowed disabled:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-50 dark:disabled:bg-slate-800"
+              className="h-11 w-20 rounded-2xl border border-slate-300 bg-white px-3 text-center text-slate-900 outline-none transition focus:border-fuchsia-400 disabled:cursor-not-allowed disabled:bg-slate-100 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-50 dark:disabled:bg-slate-800"
             />
           </label>
         ))}

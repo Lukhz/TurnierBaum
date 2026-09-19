@@ -41,7 +41,7 @@ export function StandingsTable({ players, rows, title }: StandingsTableProps) {
                 <td className="px-3 py-3 text-slate-600 dark:text-slate-300">{row.draws}</td>
                 <td className="px-3 py-3 text-slate-600 dark:text-slate-300">{row.losses}</td>
                 <td className="px-3 py-3 text-slate-600 dark:text-slate-300">{row.goalDifference}</td>
-                <td className="px-3 py-3 font-semibold text-indigo-600 dark:text-indigo-300">{row.points}</td>
+                <td className="px-3 py-3 font-semibold text-fuchsia-600 dark:text-fuchsia-300">{row.points}</td>
               </tr>
             ))}
           </tbody>
