@@ -1,8 +1,15 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-primary: #671e1c;
+  --color-secondary: #ffcd00;
+  --color-tertiary: #6339db;
+  --color-accent: #feeff6;
+}
+
 :root {
-  color: #4a044e;
-  background: #fff7ed;
+  color: #671e1c;
+  background: #feeff6;
   font-family:
     Inter,
     system-ui,

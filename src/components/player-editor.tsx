@@ -46,7 +46,7 @@ export function PlayerEditor({
     <section className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
       <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-950">
         <div className="mb-6 flex items-center gap-3">
-          <div className="rounded-2xl bg-emerald-500/10 p-3 text-emerald-500">
+          <div className="rounded-2xl bg-accent p-3 text-tertiary">
             <Users className="h-6 w-6" />
           </div>
           <div>
@@ -67,7 +67,7 @@ export function PlayerEditor({
                 submitNewPlayer()
               }
             }}
-            className="min-h-12 flex-1 rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none ring-0 transition focus:border-fuchsia-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-50"
+            className="min-h-12 flex-1 rounded-2xl border border-slate-300 bg-white px-4 py-3 text-slate-900 outline-none ring-0 transition focus:border-tertiary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-50"
             placeholder="Spieler oder Team hinzufügen"
           />
           <button
@@ -75,7 +75,7 @@ export function PlayerEditor({
             onClick={() => {
               submitNewPlayer()
             }}
-            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-fuchsia-600 px-5 py-3 font-semibold text-white transition hover:bg-fuchsia-500"
+            className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-primary px-5 py-3 font-semibold text-white transition hover:bg-primary/90"
           >
             <Plus className="h-4 w-4" /> Hinzufügen
           </button>
@@ -124,7 +124,7 @@ export function PlayerEditor({
                       event.currentTarget.blur()
                     }
                   }}
-                  className="min-h-11 flex-1 rounded-2xl border border-slate-300 bg-white px-4 py-2 text-slate-900 outline-none transition focus:border-fuchsia-400 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-50"
+                  className="min-h-11 flex-1 rounded-2xl border border-slate-300 bg-white px-4 py-2 text-slate-900 outline-none transition focus:border-tertiary dark:border-slate-700 dark:bg-slate-900 dark:text-slate-50"
                 />
                 <button
                   type="button"
@@ -157,7 +157,7 @@ export function PlayerEditor({
             type="button"
             onClick={onGenerate}
             disabled={!canGenerate}
-            className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-slate-900 px-5 py-3 font-semibold text-white transition hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-300 dark:bg-fuchsia-600 dark:hover:bg-fuchsia-500 dark:disabled:bg-slate-700"
+            className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-primary px-5 py-3 font-semibold text-white transition hover:bg-primary/90 disabled:cursor-not-allowed disabled:bg-slate-300 dark:disabled:bg-slate-700"
           >
             Turnier generieren
           </button>
