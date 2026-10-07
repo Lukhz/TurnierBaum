@@ -126,7 +126,7 @@ function App() {
                   <button
                     type="button"
                     onClick={() => setStep(2)}
-                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-emerald-600 px-6 py-3 font-semibold text-white transition hover:bg-emerald-500"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-emerald-700 px-6 py-3 font-semibold text-white transition hover:bg-emerald-800"
                   >
                     Starten <ArrowRight className="h-4 w-4" />
                   </button>
@@ -220,7 +220,7 @@ function App() {
                     type="button"
                     onClick={() => setStep(5)}
                     disabled={!tournament.isComplete}
-                    className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-emerald-700 px-5 py-3 font-semibold text-white transition hover:bg-emerald-600 disabled:cursor-not-allowed disabled:bg-slate-300 dark:bg-emerald-600 dark:hover:bg-emerald-500 dark:disabled:bg-slate-700"
+                    className="inline-flex min-h-12 items-center justify-center rounded-2xl bg-emerald-700 px-5 py-3 font-semibold text-white transition hover:bg-emerald-800 disabled:cursor-not-allowed disabled:bg-slate-300 dark:bg-emerald-700 dark:hover:bg-emerald-800 dark:disabled:bg-slate-700"
                   >
                     Zum Ergebnis
                   </button>
@@ -289,7 +289,7 @@ function App() {
                   <button
                     type="button"
                     onClick={resetTournament}
-                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-emerald-700 px-6 py-3 font-semibold text-white transition hover:bg-emerald-600 dark:bg-emerald-600 dark:hover:bg-emerald-500"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl bg-emerald-700 px-6 py-3 font-semibold text-white transition hover:bg-emerald-800 dark:bg-emerald-700 dark:hover:bg-emerald-800"
                   >
                     Neues Turnier <RotateCcw className="h-4 w-4" />
                   </button>
