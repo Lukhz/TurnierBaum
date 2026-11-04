@@ -70,6 +70,10 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  server: {
+    port: 9004,
+    strictPort: true,
+  },
 })
 ```
 
@@ -87,6 +91,8 @@ npm run dev
 npm run lint
 npm run build
 ```
+
+Der Entwicklungsserver ist auf Port **9004** konfiguriert.
 
 ## TypeScript-Typdefinitionen
 
